@@ -1,82 +1,40 @@
-const sortByDescendingFriendCount = users =>
-  users.toSorted(
-    (firstFriend, secondFriend) =>
-      secondFriend.friends.length - firstFriend.friends.length
-  );
+class StringBuilder {
+  // Оголошуємо приватну властивсть класу - об"єкт
+  #value = {
+    initialValue: '',
+  };
 
-console.log(
-  sortByDescendingFriendCount([
-    {
-      name: 'Moore Hensley',
-      friends: ['Sharron Pace'],
-      gender: 'male',
-    },
-    {
-      name: 'Sharlene Bush',
-      friends: ['Briana Decker', 'Sharron Pace'],
-      gender: 'female',
-    },
-    {
-      name: 'Ross Vazquez',
-      friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
-      gender: 'male',
-    },
-    {
-      name: 'Elma Head',
-      friends: ['Goldie Gentry', 'Aisha Tran'],
-      gender: 'female',
-    },
-    {
-      name: 'Carey Barr',
-      friends: ['Jordan Sampson', 'Eddie Strong'],
-      gender: 'male',
-    },
-    {
-      name: 'Blackburn Dotson',
-      friends: ['Jacklyn Lucas', 'Linda Chapman'],
-      gender: 'male',
-    },
-    {
-      name: 'Sheree Anthony',
-      friends: ['Goldie Gentry', 'Briana Decker'],
-      gender: 'female',
-    },
-  ])
-);
-// [
-//   {
-//     name: "Ross Vazquez",
-//     friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
-//     gender: "male"
-//   },
-//   {
-//     name: "Sharlene Bush",
-//     friends: ["Briana Decker", "Sharron Pace"],
-//     gender: "female"
-//   },
-//   {
-//     name: "Elma Head",
-//     friends: ["Goldie Gentry", "Aisha Tran"],
-//     gender: "female"
-//   },
-//   {
-//     name: "Carey Barr",
-//     friends: ["Jordan Sampson", "Eddie Strong"],
-//     gender: "male"
-//   },
-//   {
-//     name: "Blackburn Dotson",
-//     friends: ["Jacklyn Lucas", "Linda Chapman"],
-//     gender: "male"
-//   },
-//   {
-//     name: "Sheree Anthony",
-//     friends: ["Goldie Gentry", "Briana Decker"],
-//     gender: "female"
-//   },
-//   {
-//     name: "Moore Hensley",
-//     friends: ["Sharron Pace"],
-//     gender: "male"
-//   }
-// ]
+  // Оголошуємо метод класу constructor
+  constructor(value) {
+    this.#value.initialValue = value;
+  }
+
+  // Оголошуємо метод getValue() який повертає поточне значення приватної властивості value
+  getValue() {
+    return this.#value.initialValue;
+  }
+
+  // Оголошуємо метод  padEnd(str) який додає параметр str (рядок) в кінець значення приватної властивості value об'єкта
+  padEnd(str) {
+    this.#value.initialValue += `${str}`;
+  }
+
+  // Оголошуємо метод padStart(str) який додає параметр str (рядок) на початок значення приватної властивості value об'єкта
+  padStart(str) {
+    this.#value.initialValue = `${str}${this.#value.initialValue}`;
+  }
+
+  // Оголошуємо метод padBoth(str) який додає параметр str (рядок)  і на початок значення приватної властивості value об'єкта і в кінець властивості
+  padBoth(str) {
+    this.#value.initialValue = `${str}${this.#value.initialValue}${str}`;
+  }
+}
+
+const builder = new StringBuilder('.');
+console.log(builder.getValue()); // "."
+builder.padStart('^');
+console.log(builder.getValue()); // "^."
+builder.padEnd('^');
+console.log(builder.getValue()); // "^.^"
+builder.padBoth('=');
+console.log(builder.getValue()); // "=^.^="
